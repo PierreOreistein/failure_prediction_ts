@@ -35,7 +35,7 @@ jobs:
     - name: Build the book
       run: |
         jupyter-book clean --all jupyterbook
-        jupyter-book build . --toc=jupyterbook/_toc.yml --config=jupyterbook/_config.yml --path-output=jupyterbook
+        jupyter-book build .
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
