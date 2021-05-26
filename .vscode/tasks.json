@@ -1,0 +1,42 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build requirements",
+      "type": "shell",
+      "command": "kedro",
+      "args": ["build-reqs", "--no-emit-index-url"]
+    },
+    {
+      "label": "Install",
+      "type": "shell",
+      "command": "kedro",
+      "args": ["install"],
+      "dependsOn": ["Build requirements"]
+    },
+    {
+      "label": "Jupyter-book",
+      "type": "shell",
+      "command": "jupyter-book",
+      "args": [
+        "build",
+        ".",
+        "--toc",
+        "jupyterbook/_toc.yml",
+        "--config",
+        "jupyterbook/_config.yml",
+        "--path-output",
+        "jupyterbook"
+      ],
+      "dependsOn": ["Jupyter-book clean"]
+    },
+    {
+      "label": "Jupyter-book clean",
+      "type": "shell",
+      "command": "jupyter-book",
+      "args": ["clean", "--all", "jupyterbook"]
+    }
+  ]
+}

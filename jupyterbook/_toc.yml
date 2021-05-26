@@ -1,0 +1,8 @@
+- file: jupyterbook/Introduction
+
+- part: exploration
+  chapters:
+    - file: notebooks/01_exploration
+- part: model
+  chapters:
+    - file: jupyterbook/my_model_in_a_nutshell

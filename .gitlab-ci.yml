@@ -1,0 +1,69 @@
+image: python:3.7
+
+stages:
+  - formatting and static analysis
+  - test
+  - doc
+
+.install_requirements: &install_requirements #run for all tasks of this file
+  - >
+    if [[ -z $NEXUS_READ_USER || -z $NEXUS_READ_PWD || -z $PYPI_DNS_NAME || -z $PYPI_REPOSITORY ]]; then
+      PIP_INSTALL_OPTIONS=""
+      echo "No pypi config found."
+    else
+      PIP_INSTALL_OPTIONS="
+      --index https://pypi.python.org/pypi/
+      --index-url https://pypi.python.org/simple/
+      --extra-index-url https://${NEXUS_READ_USER}:${NEXUS_READ_PWD}@${PYPI_DNS_NAME}/repository/${PYPI_REPOSITORY}/simple/
+      --trusted-host ${PYPI_DNS_NAME}
+      "
+      echo "Found pypi config."
+    fi
+  - >
+    if [ -f "src/requirements-dev.txt" ]; then
+      pip install -r src/requirements-dev.txt $PIP_INSTALL_OPTIONS
+    fi
+  - >
+    if [ -f "src/requirements.txt" ]; then
+      pip install -r src/requirements.txt $PIP_INSTALL_OPTIONS
+    fi
+
+hooks:
+  stage: formatting and static analysis
+  allow_failure: false
+  script:
+    - *install_requirements
+    - pre-commit install
+    - pre-commit run --all-files
+
+test-with-coverage:
+  stage: test
+  allow_failure: false
+  script:
+    - *install_requirements
+    - kedro test
+
+pages:
+  stage: doc
+  tags:
+    - sphinx
+  script:
+    - *install_requirements
+    - jupyter-book clean --all jupyterbook
+    - jupyter-book build . --toc=jupyterbook/_toc.yml --config=jupyterbook/_config.yml --path-output=jupyterbook
+    - mkdir public
+    - mv jupyterbook/_build/html/* public
+  artifacts:
+    paths:
+      - public
+  rules:
+    # automatic doc build on master or develop...
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop"
+      # ... only if changes in jupyterbook or notebook folder
+      changes:
+        - jupyterbook/**/*
+        - notebooks/**/*
+    # manual run always possible...
+    - when: manual
+      # ... and non blocking
+      allow_failure: true
