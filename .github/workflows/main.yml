@@ -34,6 +34,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
+        cd ./jupyterbook/
         jupyter-book clean --all jupyterbook
         jupyter-book build .
 
