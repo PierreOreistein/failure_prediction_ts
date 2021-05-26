@@ -1,2 +1,3 @@
+nbqa>=0.9.0
 mypy>=0.812
 pre-commit>=2.11.1
