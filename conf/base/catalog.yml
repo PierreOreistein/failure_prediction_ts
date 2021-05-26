@@ -35,3 +35,46 @@ y_test_raw:
   load_args:
     header: 0
     index_col: False
+
+StandardScaler:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    flavor: mlflow.sklearn
+    filepath: data/06_models/standardscaler
+
+train_preprocessed_df:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.CSVDataSet
+    filepath: data/05_model_input/train_preprocessed_df.csv
+
+X_test_preprocessed_df:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.CSVDataSet
+    filepath: data/05_model_input/X_test_preprocessed_df.csv
+
+y_test_pred:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.CSVDataSet
+    filepath: data/07_model_output/y_test_pred.csv
+
+BaselineModel:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    flavor: mlflow.sklearn
+    filepath: data/06_models/baseline_model
+
+BaselineModelTrained:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    flavor: mlflow.sklearn
+    filepath: data/06_models/baseline_model_trained
+
+BaselineMetrics:
+  type: pandas.JSONDataSet
+  filepath: data/07_model_output/model_results.json

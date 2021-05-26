@@ -1,0 +1,7 @@
+columns_to_drop: ["setting_1", "setting_2", "setting_3", "s_0", "s_4", "s_5", "s_9", "s_15", "s_17", "s_18"]
+
+deep-learning-parameters:
+  - nb_features: 15
+  - length-window: 1
+  - batch-size: 64
+  - epoch: 10

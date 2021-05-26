@@ -6,7 +6,7 @@
 #######################################################################################
 # Book settings
 title                       : " TurboFan-Failure-Prediction "  # The title of the book. Will be placed in the left navbar.
-author                      : FieldBox.ai # The author of the book
+author                      : Pierre Oreistein # The author of the book
 copyright                   : "2021"  # Copyright year to be placed in the footer
 logo                        : ""  # A path to the book logo (with its extension, e.g. "logo.jpg")
 # Patterns to skip when building the book. Can be glob-style (e.g. "*skip.ipynb")
