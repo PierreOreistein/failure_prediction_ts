@@ -27,19 +27,15 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
-        apt install -qy make
-        *install_requirements
-        pip install -U -r requirements-doc.txt
-        make all
-        mkdir public
-        mv jupyterbook/_build/html/* public
-
+        ppip install -r src/requirements-dev.txt
+        ppip install -r src/requirements.txt
+        
+        
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build .
+        jupyter-book clean --all jupyterbook
+        jupyter-book build . --toc=jupyterbook/_toc.yml --config=jupyterbook/_config.yml --path-output=jupyterbook
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
