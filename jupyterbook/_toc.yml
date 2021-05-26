@@ -1,8 +1,21 @@
-- file: jupyterbook/Introduction
+- file: Introduction.md
 
-- part: exploration
+- part: Exploration
   chapters:
-    - file: notebooks/01_exploration
-- part: model
+    - file: notebooks/1-Data-Exploration.ipynb
+      title: Data-Exploration
+
+- part: Feature-Engineering
   chapters:
-    - file: jupyterbook/my_model_in_a_nutshell
+    - file: notebooks/2-Feature-Engineering.ipynb
+      title: Feature-Engineering
+
+- part: Baseline Model - Linear Regression
+  chapters:
+    - file: notebooks/3-Baseline-Model.ipynb
+      title: Baseline Model - Linear Regression
+
+- part: Final Model - Weibull-RNN
+  chapters:
+    - file: notebooks/4-RNN-Model.ipynb
+      title: Final Model - Weibull-RNN
