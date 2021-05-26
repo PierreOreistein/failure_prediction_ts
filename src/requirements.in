@@ -1,3 +1,4 @@
+attention==4.0
 black==v20.8b1
 kedro-viz==3.11.0
 kedro-mlflow
@@ -17,4 +18,5 @@ pytest-mock~=3.5
 pytest~=6.1.2
 scikit-learn==0.24.2
 seaborn==0.11.1
+tensorflow==2.5
 wheel~=0.36.2

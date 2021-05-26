@@ -55,5 +55,26 @@ X_test_preprocessed_df:
     type: pandas.CSVDataSet
     filepath: data/05_model_input/X_test_preprocessed_df.csv
 
+y_test_pred:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pandas.CSVDataSet
+    filepath: data/07_model_output/y_test_pred.csv
+
+BaselineModel:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    flavor: mlflow.sklearn
+    filepath: data/06_models/baseline_model
+
+BaselineModelTrained:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    flavor: mlflow.sklearn
+    filepath: data/06_models/baseline_model_trained
+
 BaselineMetrics:
-  type: kedro_mlflow.io.metrics.MlflowMetricsDataSet
+  type: pandas.JSONDataSet
+  filepath: data/07_model_output/model_results.json

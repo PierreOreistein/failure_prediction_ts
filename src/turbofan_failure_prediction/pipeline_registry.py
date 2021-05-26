@@ -31,6 +31,14 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
+from turbofan_failure_prediction.pipelines import data_processing as dp
+from turbofan_failure_prediction.pipelines.baseline_model import (
+    create_and_train_baseline_model as ctbm,
+)
+from turbofan_failure_prediction.pipelines.baseline_model import (
+    evaluate_baseline_model as ebm,
+)
+
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
@@ -38,4 +46,20 @@ def register_pipelines() -> Dict[str, Pipeline]:
     Returns:
         A mapping from a pipeline name to a ``Pipeline`` object.
     """
-    return {"__default__": Pipeline([])}
+    # Data Processing pipelines
+    data_processing_pipeline = dp.create_pipeline()
+
+    # Baseline model pipelines
+    create_and_train_pipeline = ctbm.create_pipeline()
+    evaluate_baseline_model = ebm.create_pipeline()
+
+    # Deep Learning model pipeline
+
+    return {
+        "__default__": data_processing_pipeline
+        + create_and_train_pipeline
+        + evaluate_baseline_model,
+        "data_processing": data_processing_pipeline,
+        "create_and_train_baseline_model": create_and_train_pipeline,
+        "evaluate_baseline_model": evaluate_baseline_model,
+    }
