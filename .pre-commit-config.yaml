@@ -42,14 +42,3 @@ repos:
     hooks:
       - id: flake8
         exclude: ".ipython"
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 0.9.0
-    hooks:
-      - id: nbqa-isort
-        args: [--nbqa-mutate]
-      - id: nbqa-black
-        args: [--nbqa-mutate]
-      - id: nbqa-mypy
-        args: [--nbqa-mutate]
-      - id: nbqa-flake8
-        args: [--nbqa-mutate]

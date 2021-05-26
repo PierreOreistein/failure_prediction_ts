@@ -2,3 +2,36 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html
+
+
+X_train_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/train_FD001.csv
+  # more about layers in the Data Engineering Convention:
+  # https://kedro.readthedocs.io/en/stable/03_tutorial/06_visualise_pipeline.html#interact-with-data-engineering-convention
+  layer: raw
+  load_args:
+    sep: ' '
+    header: 0
+    index_col: False
+
+X_test_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/test_FD001.csv
+  # more about layers in the Data Engineering Convention:
+  # https://kedro.readthedocs.io/en/stable/03_tutorial/06_visualise_pipeline.html#interact-with-data-engineering-convention
+  layer: raw
+  load_args:
+    sep: ' '
+    header: 0
+    index_col: False
+
+y_test_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/RUL_FD001.csv
+  # more about layers in the Data Engineering Convention:
+  # https://kedro.readthedocs.io/en/stable/03_tutorial/06_visualise_pipeline.html#interact-with-data-engineering-convention
+  layer: raw
+  load_args:
+    header: 0
+    index_col: False
