@@ -1,4 +1,6 @@
 black==v20.8b1
+kedro-viz==3.11.0
+kedro-mlflow
 flake8>=3.7.9, <4.0
 ipython~=7.21
 isort>~=5.8
